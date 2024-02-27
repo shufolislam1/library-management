@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import UserRegistrationView,UserLoginView, UserLogoutView, UserProfileUpdateView, home, all_books
+from .views import UserLoginView, UserLogoutView, UserProfileUpdateView, home, all_books, UserRegistrationView
 from django.conf import settings
 from django.conf.urls.static import static
 from core import views
 
 urlpatterns = [
+    # path('register/', register, name='register'),
     path('register/', UserRegistrationView.as_view(), name='register'),
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', UserLogoutView.as_view(), name='logout'),

@@ -16,11 +16,24 @@ class UserRegistrationView(FormView):
     success_url = reverse_lazy('home')
     
     def form_valid(self, form):
+        print("Form is valid")
         print(form.cleaned_data)
         user = form.save()
+        print("User saved successfully")
         messages.success(self.request, 'registered successful')
         login(self.request, user)
         return super().form_valid(form)
+# def register(request):
+#     if request.method == 'POST':
+#         register_form = UserRegistrationForm(request.POST)
+#         if register_form.is_valid():
+#             register_form.save()
+#             messages.success(request,'registered successful')
+#             return redirect('register')
+
+#     else:
+#         register_form =UserRegistrationForm()
+#     return render(request, 'user_registration.html', {'form':register_form, 'type':'register'})
     
 class UserLoginView(LoginView):
     template_name = 'user_login.html'
