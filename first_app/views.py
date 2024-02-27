@@ -6,17 +6,19 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from .forms import UserUpdateForm
 from .models import Book, Catagory
+from django.contrib import messages
 
 # Create your views here.
 
 class UserRegistrationView(FormView):
     template_name =  'user_registration.html'
     form_class = UserRegistrationForm
-    success_url = reverse_lazy('register')
+    success_url = reverse_lazy('home')
     
     def form_valid(self, form):
         print(form.cleaned_data)
         user = form.save()
+        messages.success(self.request, 'registered successful')
         login(self.request, user)
         return super().form_valid(form)
     
@@ -50,9 +52,13 @@ class UserProfileUpdateView(View):
     
 def home(request, catagory_slug = None):
     books = Book.objects.all()
+    print(books)
+    
     if catagory_slug is not None:
         catagorys = Catagory.objects.get(slug = catagory_slug)
         books = Book.objects.filter(catagory = catagorys)
+        print(books)
+        print(catagorys)
     catagorys = Catagory.objects.all()
     
     return render(request, 'home.html', {'catagorys': catagorys, 'books': books})
@@ -60,5 +66,7 @@ def home(request, catagory_slug = None):
 def all_books(request):
     books = Book.objects.all()
     catagorys = Catagory.objects.all()
-
+    print(books)
+    print(catagorys)
+    
     return render(request, 'home.html', {'catagorys': catagorys, 'books': books})
