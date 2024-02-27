@@ -13,10 +13,10 @@
 <button type="button" class="btn btn-warning"><a href="{% url 'all_books' %}" style="text-decoration: none;">All</a></button>
 
 {% for catagory in catagorys %}
-<button type="button" class="btn btn-warning"><a href='{% url "catagory" catagory.slug %}' style="text-decoration: none;">{{catagory}}</a> </button>
+<button type="button" class="btn btn-warning"><a href="{% url 'catagory' catagory.slug %}" style="text-decoration: none;">{{catagory}}</a> </button>
 {% endfor %}
 
-<h4>Total {{books | length}} books found</h4>
+<h4>Total {{ books | length }} books found</h4>
 <div class='d-flex row my-3'>
     {% for book in books %}
         <div class='col-6'>

@@ -13,20 +13,16 @@ class UserRegistrationForm(UserCreationForm):
     
     class Meta:
         model = User
-        fields = ['username', 'password', 'first_name', 'last_name', 'email', 'birth_date', 'gender', 'city', 'country']
+        fields = ['username', 'password', 'first_name', 'last_name', 'email']
         
-    # def save(self, commit = True):
-    #     our_user = super().save(commit=False)
-    #     if commit == True:
-    #         our_user.save()
+    def save(self, commit = True):
+        our_user = super().save(commit=False)
+        if commit == True:
+            our_user.save()
             # account_type = self.cleaned_data.get('account_type')
-            # birth_date = self.cleaned_data.get('birth_date')
-            # gender = self.cleaned_data.get('gender')
+            
             
             # street_address = self.cleaned_data.get('street_address')
-            # city = self.cleaned_data.get('city')
-            # postal_code = self.cleaned_data.get('postal_code')
-            # country = self.cleaned_data.get('country')
             
             # userAddress.objects.create(
             #     user = our_user,
@@ -42,7 +38,7 @@ class UserRegistrationForm(UserCreationForm):
             #     birth_date = birth_date,
             #     gender = gender
             # )
-        # return our_user
+        return our_user
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
